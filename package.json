@@ -1,0 +1,22 @@
+{
+  "name": "gastoken_usage_demo",
+  "version": "1.0.0",
+  "description": "Sample ETH GasToken ERC20 token usage tests",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodyce/gastoken_usage_demo.git"
+  },
+  "author": "Rodimiro Cerrato E.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rodyce/gastoken_usage_demo/issues"
+  },
+  "homepage": "https://github.com/rodyce/gastoken_usage_demo#readme",
+  "dependencies": {
+    "truffle": "^5.1.9"
+  }
+}
