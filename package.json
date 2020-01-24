@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/rodyce/gastoken_usage_demo#readme",
   "dependencies": {
+    "@openzeppelin/contracts": "^2.4.0",
     "truffle": "^5.1.9"
+  },
+  "devDependencies": {
+    "ganache-cli": "^6.8.2"
   }
 }
