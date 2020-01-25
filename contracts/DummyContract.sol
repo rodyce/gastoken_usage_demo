@@ -9,17 +9,18 @@ contract DummyContract is Ownable {
     using SafeMath for uint256;
 
     mapping(address => uint256) private balances;
-    address private gasToken1Address;
-    bool private useGasToken1;
+    address public gasToken1Address;
+    bool public useGasToken1;
 
     constructor(address _gasToken1Address) public {
         require(_gasToken1Address != address(0), 'must have GasToken1 address');
         gasToken1Address = _gasToken1Address;
+        useGasToken1 = false;
     }
 
-    function addBalances(address[] memory recipients, uint256[] memory amounts) public onlyOwner {
-        require(recipients.length > 0, 'At least one recipient required');
-        require(recipients.length == amounts.length, 'recipients and amounts must match');
+    function addBalances(address[] memory addresses, uint256[] memory amounts) public onlyOwner {
+        require(addresses.length > 0, 'At least one recipient required');
+        require(addresses.length == amounts.length, 'addresses and amounts must match');
 
         if (useGasToken1) {
             // Use half of the gas token balance.
@@ -33,13 +34,13 @@ contract DummyContract is Ownable {
             gasToken1.free(thisBalance.div(2));
         }
 
-        for (uint256 i = 0; i < recipients.length; i++) {
-            if (recipients[i] == address(0)) {
+        for (uint256 i = 0; i < addresses.length; i++) {
+            if (addresses[i] == address(0)) {
                 // Skip the zero address.
                 continue;
             }
             // Increase address' balance.
-            balances[recipients[i]] = balances[recipients[i]].add(amounts[i]);
+            balances[addresses[i]] = balances[addresses[i]].add(amounts[i]);
         }
     }
 
@@ -47,11 +48,11 @@ contract DummyContract is Ownable {
         return balances[addr];
     }
 
-    function toggleUseGasToken1() public {
-        useGasToken1 = !useGasToken1;
-    }
     function usingGasToken1() external view returns(bool) {
         return useGasToken1;
+    }
+    function setUseGasToken1(bool value) public {
+        useGasToken1 = value;
     }
 
     function mintGasToken1(uint256 units) public {
